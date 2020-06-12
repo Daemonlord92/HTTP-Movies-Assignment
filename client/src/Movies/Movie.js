@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
+import Redirect from "react-router-dom/es/Redirect";
 
-function Movie({ addToSavedList }) {
+function Movie({ addToSavedList }, props) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
 
@@ -26,6 +27,7 @@ function Movie({ addToSavedList }) {
     axios
         .delete(`http://localhost:5000/api/movies/${params.id}`, movie)
         .then(res => {
+            return <Redirect to={{ pathname: '/'}} />
         })
         .catch(err => {
           console.log(err)
